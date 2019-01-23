@@ -1,0 +1,102 @@
+{% extends "layout.html" %}
+{% block style %}
+<style>
+    .container{
+        padding: 10px;
+        display:flex;
+    }
+    #notesDiv1,#notesDiv2{
+        flex:1;
+    }
+	iframe{
+		width:100%;
+		height: 120vh;
+		}
+    #notesDisplay{
+        border: 5px solid lightgreen;
+    }
+</style>
+{% endblock %}
+{% block content %}
+<h1 id="coursename">{{ course }}</h1>
+
+<iframe src= {{ link }}>
+    alternative content for browsers which do not support iframe.
+</iframe>
+<hr>
+<div class="container">
+    <div id="notesDiv1">
+        
+        <h2> ADD NOTES</h2>
+        <textarea id="notes" rows="4" cols="50" name="notes" form="notesform"></textarea>
+        <input type="submit" value="add notes" id="notesButton" class="btn">
+        
+    </div>
+    <div id="notesDiv2">
+        <h2>NOTES</h2>
+        <div id="notesDisplay">
+            {% for note in notes %}
+            {% autoescape off %}
+            {{ note.notes }}
+            {% endautoescape %}
+            
+            {% endfor %}
+        </div>
+    </div>
+
+</div>
+    <div>
+        <h2>QUESTIONS</h2>
+        <textarea id="question" rows="3" cols="40" name="question" ></textarea>
+        <input type="submit" value="Ask A Question" id="questionButton" class="btn">
+        <span id="questionSentConf" style="color:green;"></span>
+        <br><a href="{% url 'forum' %}">FORUM</a>
+    </div>
+
+
+
+<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+
+<script>
+    var notes; var course; var question;
+
+    $("#notesButton").click(function () {
+      notes = $("#notes").val();
+      course = $("#coursename").html();
+      
+       $.ajax({
+        url: 'ajax/save_notes/',
+        data: {
+          'notes': notes,
+          'course': course
+        },
+        dataType: 'json',
+        success: function (data) {
+            console.log(data);
+            document.querySelector("#notesDisplay").innerHTML= data.notes;
+            document.querySelector("#notes").value= '';
+        }
+      });
+    });
+    
+    $("#questionButton").click(function(){
+        question = $("#question").val();
+        course = $("#coursename").html();
+
+        $.ajax({
+            url: 'ajax/ask_question/',
+            data:{
+            'question': question,
+            'course' : course
+        },
+        dataType: 'json',
+        success: function (data) {
+        document.querySelector("#questionSentConf").innerHTML= data.notes;   
+        }
+        });
+    });
+
+
+  </script>
+</script>
+{% endblock %}

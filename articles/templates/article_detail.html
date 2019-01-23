@@ -1,0 +1,14 @@
+{% extends 'layout.html' %}
+
+{% block title %}Article Detail{% endblock %}
+
+{% block content %}
+<h1 style="text-decoration: underline; text-align: center;">{{ title }}</h1>
+<h2>By-{{ writer }}, &nbsp; Date-{{ date }}</h2>
+    {% autoescape off %}
+    {{ content }}
+    {% endautoescape %}
+    <br>
+
+{% endblock %}
+

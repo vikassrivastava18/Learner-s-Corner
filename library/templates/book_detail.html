@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<img  src= {{ link }}>
+
+<h2>Title- {{ book.title }}</h2>
+<h3>Author- {{ book.author }}</h3>
+<h3>Description:</h3>
+<p style="text-align: center;">{{ book.summary }}</p>
+<h3>ISBN: {{ book.isbn }} </h3><hr><hr>
+<h3>Copies</h3>
+<ol>
+{% for book in bookinstance %}  
+<li>status:{{ book.get_status_display }}</li>
+{% endfor %}
+</ol>
+
+{% endblock %}

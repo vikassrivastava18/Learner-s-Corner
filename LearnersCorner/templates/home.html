@@ -1,0 +1,18 @@
+{% extends 'layout.html' %}
+
+{% block title %} Home {% endblock %}
+{% block style %}
+<style>
+
+</style>
+{% endblock %}
+{% block content %}
+<h2 style="text-decoration: underline;">Credits:</h2>
+1) Open source blogs by- Vitor Freitas<br>
+2) Mozilla docs on Django- library application <br>
+3) Nigel George book- Mastering Django and his open source codes on Github. <br>
+4) imgur.com Website for hosting images(for free !!) <br>
+5) Open library Api
+{% load static %}
+<img src="{% static 'final.png' %}">
+{% endblock %}  

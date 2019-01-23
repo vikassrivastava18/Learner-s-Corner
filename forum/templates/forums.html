@@ -1,0 +1,18 @@
+{% extends 'layout.html' %}
+{% block title %}Forum{% endblock %}
+{% block script %}
+
+{% endblock %}
+{% block content %}
+<h1 style="text-align: center;text-decoration: underline; color:green;">FORUM</h1>
+{% for q in questions %}
+
+<a href="{% url 'answerdetails' q.id %}" target="blank">{{ q.question }} -{{ q.get_status_display }}</a>
+<hr>
+{% endfor %}
+<div id="more"></div>
+
+{% endblock %}
+
+
+

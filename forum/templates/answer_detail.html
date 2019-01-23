@@ -1,0 +1,44 @@
+{% extends 'layout.html' %}
+{% block title %}Answer_detail{% endblock %}
+{% block content %}
+<h3>Q)<span id="questionId">{{ question }}</span> <span>-( {{ question.asked_by }}</span>, {{ question.date }} ) </h3>
+<ol>
+
+<h4>Answers:</h4>
+{% for answer in answers %}
+<li><p>{{ answer.answer }} - {{ answer.answered_by }}, Date {{ answer.date }}</p></li>
+{% endfor %}
+</ol>
+{% if can_change %}
+    <button id="resolvebtn" class="btn">Resolved</button><span id="confMsg" style="color:blue;"></span>
+{% endif %}
+
+<div id="answerQuestion">
+        <form action="" method="POST"> 
+                {% csrf_token %}
+            <h3>Answer</h3>
+            <input type="text" class="form-control" name="answer" placeholder="You answer">
+            <input type="submit" class="btn" value="Submit">
+           
+        </form>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+<script>
+let question = document.querySelector("#questionId").innerHTML;
+$("#resolvebtn").click(function () {
+    console.log(question);
+     $.ajax({
+      url: 'ajax/resolved/',
+      data: {
+        'question': question,
+      },
+      dataType: 'json',
+      success: function (data) {
+        document.querySelector("#confMsg").innerHTML=data.message;
+      }
+    });
+  });
+</script>
+{% endblock %}

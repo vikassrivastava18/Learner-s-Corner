@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+{% block content %}
+
+
+{% for book in books %}
+<a href="{% url 'book_detail' book.isbn %}">{{ book.title }}</a><hr>
+{% endfor %}
+{% endblock %}
+
+
+
+

@@ -1,0 +1,14 @@
+{% extends 'layout.html'%}
+{% block title %}Article{% endblock %}
+
+
+{% block content %}
+    <h1 style="text-align: center;text-decoration: underline; color:green;">ARTICLES</h2>
+    <ol>
+{% for article in articles %}
+<li><a href="{% url 'article_detail' article.id %}">{{ article.title }} &nbsp;-{{ article.writer }}</a></li>
+{% endfor %}
+    </ol>
+ <a href="{% url 'write_article' %}"><button class="btn">Write Article</button></a>
+{% endblock %}
+

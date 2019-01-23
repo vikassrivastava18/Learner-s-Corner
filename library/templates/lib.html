@@ -1,0 +1,68 @@
+{% extends "layout.html" %}
+{% block style %}
+
+<style>
+    
+    @media screen and (min-width: 700px){
+    .container{
+        display:flex;
+  
+    }
+    nav,aside{
+        flex:1;
+        text-align: left;
+    }
+    main{
+        flex:6;
+        text-align: center;
+    }
+    img{
+        position: relative;
+        top: 50px;
+    }
+    }
+</style>
+{% endblock%}
+{% block content %}
+<div class="container">
+<!-- Navigation -->    
+<nav>
+<h3>LIBRARY</h3>
+<ul>
+<li><strong>Books:</strong> {{ num_books }}</li>
+<li><strong>Copies:</strong> {{ num_instances }}</li>
+<li><strong>Copies available:</strong> {{ num_instances_available }}</li>
+<li><strong>Authors:</strong> {{ num_authors }}</li>
+</ul>
+
+</nav>
+
+<!-- Main -->  
+<main>
+{% for genre in Genres %}
+<a href="{% url 'book_by_genre' genre.name %}"><span style="font-size:x-large;">{{ genre.name }}</span></a>
+{% if not forloop.last %}, {% endif %}
+{% endfor %}
+<br>
+
+<form action ="" method ="POST">
+    {% csrf_token %}
+ <input type ="text" name ="q"> 
+ <input type ="submit" value ="Search">
+ </form>
+
+ {% load static %}
+ <img src="{% static 'final.png' %}">
+</main>
+
+<!-- Aside -->  
+<aside>
+    <h3>New Arrivals</h3>
+    {% for arrival in arrivals %}
+    <li><strong></strong> {{ arrival.book.title }} status: {{ arrival.get_status_display }}</li>
+    {% endfor %}
+</aside>
+
+</div>
+
+{% endblock %}

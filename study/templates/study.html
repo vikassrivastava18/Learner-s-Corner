@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h1 style="text-align: center;text-decoration: underline; color:green;">STUDY</h1>
+<style>
+  
+    img{
+        position: relative;
+        bottom: 150px;
+    }
+</style>
+{% for s in study %}
+
+<h2>{{ s.subject.name }}</h2>
+{% for c in s.course %}
+<a href="{% url 'courses' c.name %}" target="blank">{{ c.name }}</a>
+<br>
+{% endfor %}
+
+{% endfor %}
+{% load static %}
+<img src="{% static 'final.png' %}"> 
+{% endblock %}

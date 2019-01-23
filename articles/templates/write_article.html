@@ -1,0 +1,20 @@
+{% extends 'layout.html'%}
+{% block title %}Write Article{% endblock %}
+{% block content %}
+<h1 style="text-decoration: underline;">Write An Article</h1>
+<h2>Instructions</h2>
+<h4>You are free to present your article in a manner you like, with images,videos,etc. Fill within the { } your approprite content <br>
+1) Sub Heading- {{ sub_heading }} <br>
+2) Image- {{ img }} <br>
+3) content- {{ content }}</h4>
+<br>
+<form action="" method="POST">
+    {% csrf_token %}
+    <h3>Title:</h3>
+    <input type="text" name="title" required><br>
+    <h3>Content:</h3>
+    <textarea name="article_content" id="article_content" cols="50" rows="25" required></textarea>
+    <input type="submit" class="btn" value="Submit">
+
+</form>
+{% endblock %}
